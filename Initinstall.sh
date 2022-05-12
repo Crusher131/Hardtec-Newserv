@@ -68,7 +68,7 @@ fi
 
 
 CONFIGURE_LOGIN_SCREEN() {
-    wget https://raw.githubusercontent.com/KittyKatt/screenFetch/master/screenfetch-dev -O /usr/bin/screenfetch
+    wget https://raw.githubusercontent.com/Crusher131/Hardtec-Newserv/main/screenfetch.sh -O /usr/bin/screenfetch
     chmod +x /usr/bin/screenfetch
     wget https://raw.githubusercontent.com/Crusher131/Hardtec-Newserv/main/screenshow.sh -O /scripts/screenshow.sh
     hmod +x /scripts/screenshow.sh
