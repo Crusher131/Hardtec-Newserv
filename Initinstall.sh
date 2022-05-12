@@ -173,23 +173,22 @@ ipv6_disable=(
 do
 if grep -Fxq "$i" /etc/sysctl.conf
 then
-echo ""
+echo "" >> /dev/null
 else
     echo "Desabilitando IPV6"
     echo "$i" >> /etc/sysctl.conf
 fi
 done
-sysctl -p
+sysctl -p >> /dev/null
 echo "IPV6 Desabilitado"
 }
 
 DISABLE_SELINUX() {
         echo "Desabilitando SELINUX"
 setenforce 0
-sedisable="SELINUX=disabled"
 if grep -Fxq "SELINUX=disabled" /etc/selinux/config
 then
-echo ""
+echo "" >> /dev/null
 else
       sed -i 's/SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
 fi
