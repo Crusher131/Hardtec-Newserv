@@ -14,7 +14,7 @@ echo -e " __  __     ______     ______     _____     ______   ______     ______
 echo -e "\033[m"
 
 BASIC_PACKAGES(){
-    CHECKPACKAGES=(epel-release vim-enhanced yum-utils iotop rsync htop screen net-tools screen curl wget rsync ntp httpd-tools ntsysv)
+    CHECKPACKAGES=(epel-release vim-enhanced yum-utils iotop rsync htop screen screen curl wget rsync httpd-tools ntsysv samba acpid)
     INSTALLPACKAGES=()
     INSTALLEDPACKAGES=()
 echo "Limpando Cache"
@@ -68,13 +68,11 @@ fi
 
 
 CONFIGURE_LOGIN_SCREEN() {
-  yum install git >> /dev/null
-  git clone https://github.com/KittyKatt/screenFetch.git
-  cp screenFetch/screenfetch-dev /usr/bin/screenfetch
-  chmod +x /usr/bin/screenfetch
- wget https://raw.githubusercontent.com/Crusher131/Hardtec-Newserv/main/screenshow.sh -O /scripts/screenshow.sh
- chmod +x /scripts/screenshow.sh
- if grep -Fxq "[ -z \"\$PS1\" ]  || /scripts/screenshow.sh" /etc/profile
+    wget https://raw.githubusercontent.com/KittyKatt/screenFetch/master/screenfetch-dev -O /usr/bin/screenfetch
+    chmod +x /usr/bin/screenfetch
+    wget https://raw.githubusercontent.com/Crusher131/Hardtec-Newserv/main/screenshow.sh -O /scripts/screenshow.sh
+    hmod +x /scripts/screenshow.sh
+    if grep -Fxq "[ -z \"\$PS1\" ]  || /scripts/screenshow.sh" /etc/profile
 then
 printf ""
 else
