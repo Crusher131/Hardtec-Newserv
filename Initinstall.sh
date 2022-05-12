@@ -164,8 +164,43 @@ fi
 
 
 
+DISABLE_IPV6(){
+ipv6_disable=(
+    "net.ipv6.conf.all.disable_ipv6 = 1"
+    "net.ipv6.conf.default.disable_ipv6 = 1"
+)
+    for i in "${ipv6_disable[@]}"
+do
+if grep -Fxq "$i" /etc/sysctl.conf
+then
+echo ""
+else
+    echo "Desabilitando IPV6"
+    echo "$i" >> /etc/sysctl.conf
+fi
+done
+sysctl -p
+echo "IPV6 Desabilitado"
+}
+
+DISABLE_SELINUX() {
+        echo "Desabilitando SELINUX"
+setenforce 0
+sedisable="SELINUX=disabled"
+if grep -Fxq "SELINUX=disabled" /etc/selinux/config
+then
+echo ""
+else
+      sed -i 's/SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
+fi
+echo "SELINUX DESABILITADO"
+}
+
+
 BASIC_PACKAGES
 CREATE_DIR
 CONFIGURE_LOGIN_SCREEN
 TEC_KEYS
 INSTALL_CHRONY
+DISABLE_IPV6
+DISABLE_SELINUX
