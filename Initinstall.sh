@@ -68,9 +68,9 @@ fi
 
 
 CONFIGURE_LOGIN_SCREEN() {
-    wget https://raw.githubusercontent.com/Crusher131/Hardtec-Newserv/main/screenfetch.sh -O /usr/bin/screenfetch
+    wget https://raw.githubusercontent.com/Crusher131/Hardtec-Newserv/main/screenfetch.sh -O /usr/bin/screenfetch >> /dev/null
     chmod +x /usr/bin/screenfetch
-    wget https://raw.githubusercontent.com/Crusher131/Hardtec-Newserv/main/screenshow.sh -O /scripts/screenshow.sh
+    wget https://raw.githubusercontent.com/Crusher131/Hardtec-Newserv/main/screenshow.sh -O /scripts/screenshow.sh >> /dev/null
     chmod +x /scripts/screenshow.sh
     if grep -Fxq "[ -z \"\$PS1\" ]  || /scripts/screenshow.sh" /etc/profile
 then
@@ -173,7 +173,7 @@ ipv6_disable=(
 do
 if grep -Fxq "$i" /etc/sysctl.conf
 then
-echo "" >> /dev/null
+printf ""
 else
     echo "Desabilitando IPV6"
     echo "$i" >> /etc/sysctl.conf
@@ -188,7 +188,7 @@ DISABLE_SELINUX() {
 setenforce 0
 if grep -Fxq "SELINUX=disabled" /etc/selinux/config
 then
-echo "" >> /dev/null
+printf ""
 else
       sed -i 's/SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
 fi
