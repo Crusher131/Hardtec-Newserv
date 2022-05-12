@@ -114,8 +114,8 @@ done
 
 INSTALL_CHRONY() {
 echo "Instalando Chrony"
-PACOTE_OK=$(rpm -qa |grep "chrony")
-if [ "" = "$PACOTE_OK" ]; then
+CHRONY_OK=$(rpm -qa |grep "chrony")
+if [ "" = "$CHRONY_OK" ]; then
   echo " Instalando Chrony."
   yum install chrony -y >> /dev/null
   echo "Chrony: Instalado!"
