@@ -14,7 +14,7 @@ echo -e " __  __     ______     ______     _____     ______   ______     ______
 echo -e "\033[m"
 
 BASIC_PACKAGES(){
-    CHECKPACKAGES=(epel-release vim-enhanced yum-utils iotop rsync htop screen screen curl wget rsync ntsysv samba acpid bc net-tools)
+    CHECKPACKAGES=(epel-release vim-enhanced yum-utils iotop rsync htop screen screen curl wget rsync ntsysv samba acpid bc net-tools xinetd)
     INSTALLPACKAGES=()
     INSTALLEDPACKAGES=()
 echo "Limpando Cache"
