@@ -1,8 +1,7 @@
 #!/bin/bash
 
 echo -e "\033[38;2;0;0;255m"
-echo "Script desenvolvido por Jeferson Zacarias sens (Jeferson@hardtec.srv.br)
-para CentOS 7"
+echo "Script desenvolvido por Jeferson Zacarias sens (Jeferson@hardtec.srv.br)"
 echo -e " __  __     ______     ______     _____     ______   ______     ______    
 /\ \_\ \   /\  __ \   /\  == \   /\  __-.  /\__  _\ /\  ___\   /\  ___\   
 \ \  __ \  \ \  __ \  \ \  __<   \ \ \/\ \ \/_/\ \/ \ \  __\   \ \ \____  
@@ -19,12 +18,12 @@ mlocate)
     INSTALLPACKAGES=()
     INSTALLEDPACKAGES=()
 echo "Limpando Cache"
-#yum clean all >> /dev/null
-#echo "Criando Cache Atualizado"
-#yum makecache >> /dev/null
+yum clean all >> /dev/null
+echo "Criando Cache Atualizado"
+yum makecache >> /dev/null
 echo "Instalando Atualizações"
-#yum update -y >> /dev/null
-#yum upgrade -y >> /dev/null
+yum update -y >> /dev/null
+yum upgrade -y >> /dev/null
 echo "Verificando pacotes basicos"
 for i in "${CHECKPACKAGES[@]}"
 do
