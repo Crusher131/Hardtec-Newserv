@@ -17,6 +17,7 @@ upgrade=false
 basicpkg=false
 loginscreen=false
 keys=false
+askreboot=false
 chrony=false
 ip6=false
 se=false
