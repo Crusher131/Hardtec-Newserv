@@ -12,6 +12,55 @@ echo -e " __  __     ______     ______     _____     ______   ______     ______
 
 echo -e "\033[m"
 
+update=false
+upgrade=false
+basicpkg=false
+loginscreen=false
+keys=false
+chrony=false
+ip6=false
+se=false
+a=${@}
+count=0
+for var in "$@"
+do
+        if [ $var == "-U" ] || [ $var == "-u" ]; then
+        upgrade=true
+        elif [ $var == "-I" ] || [ $var == "-i" ]; then
+        update=true
+        elif [ $var == "-P" ] || [ $var == "-p" ]; then
+        basicpkg=true
+        elif [ $var == "-L" ] || [ $var == "-l" ]; then
+        loginscreen=true
+        elif [ $var == "-K" ] || [ $var == "-k" ]; then
+        keys=true
+        elif [ $var == "-C" ] || [ $var == "-c" ]; then
+        chrony=true
+        elif [ $var == "-6" ]; then
+        ip6=true
+        elif [ $var == "-S" ] || [ $var == "-s" ]; then
+        se=true
+        fi
+        
+        (( count++ ))
+                    (( accum += ${#var} ))
+done
+
+
+
+
+
+
+UPDATE_PACKAGES(){
+echo "Instalando Atualizações de pacotes"
+yum update -y >> /dev/null
+}
+
+UPGRADE_OS(){
+echo "Efetuando Upgrade do sistema"
+yum upgrade -y >> /dev/null
+}
+
 BASIC_PACKAGES(){
     CHECKPACKAGES=(epel-release vim-enhanced yum-utils iotop rsync htop screen screen curl wget rsync ntsysv samba acpid bc net-tools xinetd mtools
 mlocate)
@@ -21,9 +70,7 @@ echo "Limpando Cache"
 yum clean all >> /dev/null
 echo "Criando Cache Atualizado"
 yum makecache >> /dev/null
-echo "Instalando Atualizações"
-yum update -y >> /dev/null
-yum upgrade -y >> /dev/null
+
 echo "Verificando pacotes basicos"
 for i in "${CHECKPACKAGES[@]}"
 do
@@ -195,11 +242,45 @@ fi
 echo "SELINUX DESABILITADO"
 }
 
-
+if [ $basicpkg == true ]; then
 BASIC_PACKAGES
+fi
+if [ $update == true ]; then
+UPDATE_PACKAGES
+askreboot=true
+fi
+if [ $upgrade == true ]; then
+UPGRADE_OS
+askreboot=true
+fi
 CREATE_DIR
+if [ $loginscreen == true ]; then
 CONFIGURE_LOGIN_SCREEN
+fi
+if [ $keys == true ]; then
 TEC_KEYS
+fi
+if [ $chrony == true ]; then
 INSTALL_CHRONY
+fi
+if [ $ip6 == true ]; then
 DISABLE_IPV6
+askreboot=true
+fi
+if [ $se == true ]; then
 DISABLE_SELINUX
+askreboot=true
+fi
+if [ $askreboot == true ]; then
+echo "Algumas alterações Precisam da reinicialização do sistema para funcionar."
+read -p "Deseja Reiniciar?(y,n)" -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    echo "Reiniciando o Sistema"
+    init 6
+    [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
+    else
+    [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
+fi
+fi
