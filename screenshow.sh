@@ -38,6 +38,6 @@ done
 
 
     echo -e "\033[0m\033[1;33m DISK: \033[m\n"
-    df -lh |egrep '/dev/sd|/dev/mapper' |awk '{print $1,"\t" $6,"\t\t" $3,"/ " $4, "("$5")"}'
+    df -lh |egrep '/dev/sd|/dev/mapper|/dev/nvm' |awk '{print $1,"\t" $6,"\t\t" $3,"/ " $4, "("$5")"}'
 
 exit 0
