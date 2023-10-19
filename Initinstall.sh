@@ -63,7 +63,7 @@ yum upgrade -y >> /dev/null
 }
 
 BASIC_PACKAGES(){
-    CHECKPACKAGES=(epel-release vim-enhanced yum-utils iotop rsync htop screen screen curl wget rsync ntsysv samba acpid bc net-tools xinetd mtools
+    CHECKPACKAGES=(epel-release vim-enhanced yum-utils iotop rsync htop screen screen curl wget rsync ntsysv samba acpid bc net-tools xinetd mtools speedtest-cli
 mlocate ncdu)
     INSTALLPACKAGES=()
     INSTALLEDPACKAGES=()
