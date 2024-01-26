@@ -1,12 +1,8 @@
 #!/bin/bash
 
-echo "Servidor Instalado e configurado por"
+
 echo -e "\033[38;2;0;0;255m"
-echo -e "HH   HH   AAA   RRRRRR  DDDDD   TTTTTTT EEEEEEE  CCCCC  
-HH   HH  AAAAA  RR   RR DD  DD    TTT   EE      CC    C 
-HHHHHHH AA   AA RRRRRR  DD   DD   TTT   EEEEE   CC      
-HH   HH AAAAAAA RR  RR  DD   DD   TTT   EE      CC    C 
-HH   HH AA   AA RR   RR DDDDDD    TTT   EEEEEEE  CCCCC  "
+echo "Servidor Instalado e configurado por"
 
 echo -e "\033[m"
   echo -e "Hardtec.srv.br 47 3521-2335"
