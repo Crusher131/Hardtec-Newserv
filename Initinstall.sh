@@ -2,13 +2,6 @@
 
 echo -e "\033[38;2;0;0;255m"
 echo "Script desenvolvido por Jeferson Zacarias sens (Jeferson@hardtec.srv.br)"
-echo -e " __  __     ______     ______     _____     ______   ______     ______    
-/\ \_\ \   /\  __ \   /\  == \   /\  __-.  /\__  _\ /\  ___\   /\  ___\   
-\ \  __ \  \ \  __ \  \ \  __<   \ \ \/\ \ \/_/\ \/ \ \  __\   \ \ \____  
- \ \_\ \_\  \ \_\ \_\  \ \_\ \_\  \ \____-    \ \_\  \ \_____\  \ \_____\ 
-  \/_/\/_/   \/_/\/_/   \/_/ /_/   \/____/     \/_/   \/_____/   \/_____/ "
-  echo -e "Hardtec.srv.br"
-  
 
 echo -e "\033[m"
 
@@ -16,6 +9,7 @@ update=false
 upgrade=false
 basicpkg=false
 loginscreen=false
+loginscreenht=false
 keys=false
 askreboot=false
 chrony=false
@@ -33,6 +27,8 @@ do
         basicpkg=true
         elif [ $var == "-L" ] || [ $var == "-l" ]; then
         loginscreen=true
+        elif [ $var == "-LH" ] || [ $var == "-lh" ] || [ $var == "-Lh" ] || [ $var == "-lH" ]; then
+        loginscreenht=true
         elif [ $var == "-K" ] || [ $var == "-k" ]; then
         keys=true
         elif [ $var == "-C" ] || [ $var == "-c" ]; then
@@ -129,6 +125,19 @@ fi
 
 }
 
+CONFIGURE_LOGIN_SCREENHT() {
+    wget https://raw.githubusercontent.com/Crusher131/Hardtec-Newserv/main/screenfetch.sh -O /usr/bin/screenfetch >> /dev/null
+    chmod +x /usr/bin/screenfetch
+    wget https://raw.githubusercontent.com/Crusher131/Hardtec-Newserv/main/screenshowht.sh -O /scripts/screenshowht.sh >> /dev/null
+    chmod +x /scripts/screenshowht.sh
+    if grep -Fxq "[ -z \"\$PS1\" ]  || /scripts/screenshowht.sh" /etc/profile
+then
+printf ""
+else
+ echo "[ -z \"\$PS1\" ]  || /scripts/screenshowht.sh">> /etc/profile
+fi
+
+}
 
 
 TEC_KEYS() {
@@ -255,6 +264,9 @@ UPGRADE_OS
 askreboot=true
 fi
 CREATE_DIR
+if [ $loginscreenht == true ]; then
+CONFIGURE_LOGIN_SCREENHT
+fi
 if [ $loginscreen == true ]; then
 CONFIGURE_LOGIN_SCREEN
 fi
