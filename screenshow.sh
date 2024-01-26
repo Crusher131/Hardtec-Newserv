@@ -1,11 +1,7 @@
 #!/bin/bash
 
 
-echo -e "\033[38;2;0;0;255m"
-echo "Servidor Instalado e configurado por"
 
-echo -e "\033[m"
-  echo -e "Hardtec.srv.br 47 3521-2335"
   cat /etc/redhat-release
 
 printf "\n"
