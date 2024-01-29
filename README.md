@@ -10,6 +10,8 @@ bash <(curl -s https://raw.githubusercontent.com/Crusher131/Hardtec-Newserv/main
 
 -l Tela de Login
 
+-lh Tela de Login Logo Hardtec
+
 -k Keys pra conexão
 
 -c Chrony pra manter a data atualizada
