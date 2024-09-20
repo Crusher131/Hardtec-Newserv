@@ -1,6 +1,6 @@
 # Hardtec-Newserv
 
-bash <(curl -s https://raw.githubusercontent.com/Crusher131/Hardtec-Newserv/main/Initinstall.sh) -u -i -p -l -k -c -6
+bash <(curl -s https://raw.githubusercontent.com/Crusher131/Hardtec-Newserv/main/Initinstall.sh) -u -i -p -l -k -c -6 -s
 
 -u Upgrade do servidor
 
