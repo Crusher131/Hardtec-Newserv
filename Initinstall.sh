@@ -59,8 +59,8 @@ yum upgrade -y >> /dev/null
 }
 
 BASIC_PACKAGES(){
-    CHECKPACKAGES=(hyperv-daemons bc epel-release vim-enhanced yum-utils iotop rsync htop screen screen curl wget rsync ntsysv samba acpid bc net-tools xinetd mtools speedtest-cli
-mlocate ncdu)
+    CHECKPACKAGES=(lsb_release hyperv-daemons bc epel-release vim-enhanced yum-utils iotop rsync htop screen screen curl wget rsync ntsysv samba acpid bc net-tools xinetd mtools speedtest-cli
+mlocate ncdu tar)
     INSTALLPACKAGES=()
     INSTALLEDPACKAGES=()
 echo "Limpando Cache"
@@ -252,9 +252,22 @@ fi
 echo "SELINUX DESABILITADO"
 }
 
+CHECK_OS() {
+if [ -f /etc/redhat-release ]; then
+OS=`cat /etc/redhat-release`
+echo "$OS"
+
+else
+echo "não"
+fi
+}
+
+
+CHECK_OS
 if [ $basicpkg == true ]; then
 BASIC_PACKAGES
 fi
+CHECK_OS
 if [ $update == true ]; then
 UPDATE_PACKAGES
 askreboot=true
