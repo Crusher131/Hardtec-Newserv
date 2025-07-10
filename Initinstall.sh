@@ -60,7 +60,7 @@ yum upgrade -y >> /dev/null
 
 BASIC_PACKAGES(){
     CHECKPACKAGES=(lsb_release hyperv-daemons bc epel-release vim-enhanced yum-utils iotop rsync htop screen screen curl wget rsync ntsysv samba acpid bc net-tools xinetd mtools speedtest-cli
-mlocate ncdu tar)
+mlocate ncdu tar bind-utils)
     INSTALLPACKAGES=()
     INSTALLEDPACKAGES=()
 echo "Limpando Cache"
