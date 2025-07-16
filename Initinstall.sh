@@ -10,7 +10,6 @@ upgrade=false
 basicpkg=false
 loginscreen=false
 loginscreenht=false
-keys=false
 askreboot=false
 chrony=false
 ip6=false
