@@ -29,8 +29,6 @@ do
         loginscreen=true
         elif [ $var == "-LH" ] || [ $var == "-lh" ] || [ $var == "-Lh" ] || [ $var == "-lH" ]; then
         loginscreenht=true
-        elif [ $var == "-K" ] || [ $var == "-k" ]; then
-        keys=true
         elif [ $var == "-C" ] || [ $var == "-c" ]; then
         chrony=true
         elif [ $var == "-6" ]; then
@@ -136,35 +134,6 @@ printf ""
 else
  echo "[ -z \"\$PS1\" ]  || /scripts/screenshowht.sh">> /etc/profile
 fi
-
-}
-
-
-TEC_KEYS() {
-    echo "Verificando e adicionando keys ssh Para acesso"
-rsa_pub_keys=(
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDP8FBf0qUvjgGxf2oqK0Ytgldi89ZBfQJXf8H8QCpLUCs9EU1AEv7zSmzo371Y+noUhA7t0x8/r7is6L+AfYhzBlhT88+f0TeRiS0uEB0RJLsyr9PLSMD6561OkSM60PjeHx53hiH2Osa0Joqbsd/8Ldf8nMQKIKsfL33J5tRa5CiNv46Hh1bwjmRyPvilDk5oYtK9oVjRtXA9IP4F8zc4SVM7T70ZRLO/ZSE86t8i4Y8WHBi3M5O88vbGE4dfiJl3EkvdmZccg5MZC+S/7NjJPCgqbSvRW8WCwNCZn9mtxsHQCrJCH8ckJMfpUdoBIlUt+DlJxlYvg3vySOJfVlZDEnyVrshTtqQYEaCFiQii0yYwTw51m+hqu7hRmVDixaOhpLDxe/P5pRkeD+BN+8cBPa/O+pyDQUr2NAbcZ6JEUTQHPsq1Yjkrnqa3RqpyS3XhC60cKhoGjgRykDDwUYIw84BKhTnbnyZ51XgwKJZ7tdwWHROJh8b/VUXwahSsWl0= jeferson@DESKTOP-8DOCJNF"
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKAYMXdOQnBY/ZOUNp1/Gm5Cy1xfvWRdFLzSGKsP80blFtq3xmSACZr0VeHTVttri6Q8fJqIgi9/YnsdgzFRuad2DTb7aujc/fvqJk+2CSzdw58XKszoqPPG40y3DK9I3xptuVeaLaWQdwwQcWtqjyyZdOUfc2FGKD9pVSoZSwA8dDyV9yvqNrCrj3aSFrYtv/U4N4ePDAyabwOt3WIZ7DUk2AigasuxEJi37Lw9tkPdvfFzuMFaOVGV16r0sObaCOgmFTMNSMApMVgRyiNzGSNFmv144sEy+M8WxyAV3o7JxOA7ZQEddn5tVXFpGTR4vxUFk+x+hjzKuQjuQibkPT junior@junior.hardtec.local"
-    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC4VwisCopOIpzNMS5W1V4+SmQTC5X5h6+eb3LZWss7yvSOEUK+1qWhibVmDRIgfMLqjSB7J9g2PyZwFFKTqt0nz1UTP4U5NV8Gns0iCRIt449kNSSX8jkBw3eTS2NGA14q/IIL0DhYYoY46uazG0qoBdycdRDPTUVcYhM2JgdXZW0dldb/FsU7ZPzZ+rNwN4YNKdjkWRRe6l64KQ58aoItxyl9KVqo1SLJgDj4JbQdAIhdpP1DIcIYNMXHBaxP6LxkTMrVSVRIHcxXBLrMaDKc2HeuLksvSL7QAC1g1rvj5+ksd9/IAPs2L17goSj9MpD6CWZ70MY4VsLzQM7QFMjSNy7NLA598qonDM7aPuuTrUkx2vXfCXB5Cf8doW8SCG1iDH/IZt+jObZyt/FiQl/u09yya/nqXCvoXk/aWUcAom1EGWS7RQD/mgOCZjuv/8xYh6nkO+K+zyEepdYQeaMhmPohfZv/mbd/eL+3qgvKclbsGtFyWf98EDfz9FQhHE0= claudio@Note-Claudio"
-)
-if [ ! -d "/root/.ssh" ]; then
-    mkdir /root/.ssh
-fi
-if [ ! -f "/root/.ssh/authorized_keys" ]; then
-    touch /root/.ssh/authorized_keys
-fi
-
-
-for i in "${rsa_pub_keys[@]}"
-do
-if grep -Fxq "$i" /root/.ssh/authorized_keys
-then
-echo "Key Já instalada"
-else
-    echo "Instalando key"
-    echo "$i" >> /root/.ssh/authorized_keys
-fi
-done
 
 }
 
@@ -282,9 +251,6 @@ CONFIGURE_LOGIN_SCREENHT
 fi
 if [ $loginscreen == true ]; then
 CONFIGURE_LOGIN_SCREEN
-fi
-if [ $keys == true ]; then
-TEC_KEYS
 fi
 if [ $chrony == true ]; then
 INSTALL_CHRONY
