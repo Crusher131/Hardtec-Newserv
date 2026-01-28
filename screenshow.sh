@@ -15,8 +15,8 @@ do
         echo -e " \033[0m\033[1;33mIP: \033[m$IP"
 
 done
-GATEWAY=$(route -n|grep '^0.0.0.0'|awk '{print $2}')
-        echo -e " \033[0m\033[1;33mGATEWAY: \033[m$GATEWAY"
+GATEWAY=$(ip route | grep '^default' | awk '{print $3}' | head -n1)
+echo -e " \033[0m\033[1;33mGATEWAY: \033[m$GATEWAY"
 
 DNS=$(cat /etc/resolv.conf|grep '^nameserver'|grep -v ':'|awk '{print $2}')
 DNSNUMBER=1
