@@ -1,5 +1,61 @@
 #!/bin/bash
 
+
+# Pega o mês, dia e campo 8 (hora ou ano) do arquivo mais antigo em /etc
+read mes dia ano_ou_hora <<< $(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')
+
+# Função para converter mês português para inglês
+convert_month() {
+  case "$1" in
+    jan) echo "Jan" ;;
+    fev) echo "Feb" ;;
+    mar) echo "Mar" ;;
+    abr) echo "Apr" ;;
+    mai) echo "May" ;;
+    jun) echo "Jun" ;;
+    jul) echo "Jul" ;;
+    ago) echo "Aug" ;;
+    set) echo "Sep" ;;
+    out) echo "Oct" ;;
+    nov) echo "Nov" ;;
+    dez) echo "Dec" ;;
+    *) echo "$1" ;;
+  esac
+}
+
+mes_pt=$(echo $mes | tr '[:upper:]' '[:lower:]')
+mes_en=$(convert_month $mes_pt)
+
+# Verifica se o campo 8 é hora (contém ':') ou ano
+if [[ "$ano_ou_hora" == *:* ]]; then
+  # É hora, então o ano é o ano atual
+  Ano=$(( $(date +%Y) ))
+else
+  # É ano, usa o ano do arquivo
+  Ano=$ano_ou_hora
+fi
+
+# Monta a data completa
+DataInstalacao="$mes_en $dia $Ano"
+
+# Converte para timestamp
+TimestampInstalacao=$(date -d "$DataInstalacao" +%s 2>/dev/null)
+
+if [ -z "$TimestampInstalacao" ]; then
+  echo "Erro ao converter a data de instalação: $DataInstalacao"
+  exit 1
+fi
+
+TimestampAtual=$(date +%s)
+
+# Calcula diferença em dias (valor absoluto para evitar negativo)
+DiasPassados=$(( (TimestampAtual - TimestampInstalacao) / 86400 ))
+
+if [ $DiasPassados -lt 0 ]; then
+  DiasPassados=$(( -DiasPassados ))
+fi
+
+
 echo "Servidor Instalado e configurado por"
 echo -e "\033[38;2;0;0;255m"
 echo -e "HH   HH   AAA   RRRRRR  DDDDD   TTTTTTT EEEEEEE  CCCCC  
@@ -14,6 +70,7 @@ echo -e "\033[m"
 
 printf "\n"
 screenfetch
+echo -e "\033[m\033[1;33m Servidor Linux instalado há: \033[m $DiasPassados dias ($dia/$mes/$Ano)"
 #Interfaces
 INTERFACE=$(ip -4 ad | grep 'state UP' | awk -F ":" '!/^[0-9]*: ?lo/ {print $2}')
 
