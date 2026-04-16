@@ -69,7 +69,7 @@ echo -e "\033[m"
   cat /etc/redhat-release
 
 printf "\n"
-echo -e "\033[m\033[1;33m Servidor Linux instalado há: \033[m $DiasPassados dias ($dia/$mes/$Ano)"
+echo -e "\033[m\033[1;33m Servidor instalado há: \033[m $DiasPassados dias ($dia/$mes/$Ano)"
 screenfetch
 
 #Interfaces
