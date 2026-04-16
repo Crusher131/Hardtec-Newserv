@@ -69,8 +69,9 @@ echo -e "\033[m"
   cat /etc/redhat-release
 
 printf "\n"
-screenfetch
 echo -e "\033[m\033[1;33m Servidor Linux instalado há: \033[m $DiasPassados dias ($dia/$mes/$Ano)"
+screenfetch
+
 #Interfaces
 INTERFACE=$(ip -4 ad | grep 'state UP' | awk -F ":" '!/^[0-9]*: ?lo/ {print $2}')
 
